@@ -9,11 +9,29 @@
 
 ## ▶ 빠른 시작
 
+### 1단계: 라이브러리 설치
 ```bash
-# 1. 필요한 라이브러리 설치
 pip install -r requirements.txt
+```
 
-# 2. Jupyter Notebook 실행
+### 2단계: 데이터 준비
+1. `data/` 폴더 생성
+```bash
+   mkdir data
+```
+
+2. [서울 열린데이터 광장](https://data.seoul.go.kr)에서 다운로드:
+   - 공공자전거 이용정보(월별) - 2022.01~2024.06
+   - 서울시 월별 평균 대기오염도 정보
+
+3. [기상자료개방포털](https://data.kma.go.kr)에서 다운로드:
+   - 월별 평균기온 (2022.01~2024.06)
+   - 월별 강수량 (2022.01~2024.06)
+
+4. 모든 CSV 파일을 `data/` 폴더에 저장
+
+### 3단계: 분석 실행
+```bash
 jupyter notebook analysis.ipynb
 ```
 
@@ -34,6 +52,7 @@ jupyter notebook analysis.ipynb
 - **시각화**: matplotlib
 - **모델링**: scikit-learn (RandomForestRegressor, LinearRegression, Ridge)
 - **검증**: TimeSeriesSplit (시계열 교차검증)
+- **시각화**: matplotlib, seaborn
 
 ---
 
@@ -66,6 +85,19 @@ jupyter notebook analysis.ipynb
 
 ### 3. 예측 모델 비교
 시계열 교차검증(TimeSeriesSplit, n_splits=5)으로 5가지 모델 조합을 비교했습니다.
+
+---
+
+## ▶ 시각화 결과    ← 🆕 여기에 추가
+
+### 1. EDA: 월별 추이 및 변수별 산점도
+![EDA](ttareungi_analysis.png)
+
+### 2. 상관행렬: 다중공선성 진단
+![Correlation](correlation_heatmap.png)
+
+### 3. Feature Importance: PM2.5 추가 효과
+![Feature Importance](feature_importance_comparison.png)
 
 ---
 
@@ -154,14 +186,16 @@ jupyter notebook analysis.ipynb
 ttareungi-analysis/
 ├── analysis.ipynb              # 메인 분석 노트북
 ├── README.md                   # 이 파일
-├── data/                       # 원본 데이터
-│   ├── ttareungi_*.csv         # 따릉이 월별 이용정보 (13개 파일)
-│   ├── ta_seoul.csv            # 평균기온
-│   ├── rn_seoul.csv            # 강수량
-│   └── pm_seoul.csv            # 미세먼지(PM10, PM2.5)
-└── outputs/                    # 시각화 결과
-    ├── ttareungi_analysis.png
-    └── feature_importance_comparison.png
+├── requirements.txt            # 의존 라이브러리
+├── .gitignore
+├── data/                       # 원본 데이터 (gitignore됨)
+│   ├── 서울특별시 공공자전거 이용정보(월별)_*.csv
+│   ├── ta_seoul.csv
+│   ├── rn_seoul.csv
+│   └── pm_seoul.csv
+├── ttareungi_analysis.png      # 4개 EDA 시각화
+├── correlation_heatmap.png     # 상관행렬 히트맵 (NEW)
+└── feature_importance_comparison.png  # 모델 비교
 ```
 
 ---
